@@ -2,9 +2,8 @@
 var express = require('express');
 var app = express();
 var passport = require('passport');
-var bodyParser = require('body-parser');
-var LocalStrategy = require('passport-local').Strategy;
-//The most common and traditional strategy simply authenticates a person using a username and a password.
+var bodyParser = require('body-parser'); //passport use it in the background.
+var LocalStrategy = require('passport-local').Strategy; //The most common and traditional strategy simply authenticates a person using a username and a password.
 
 //middleware
 app.use(bodyParser.urlencoded({extended: false}));
@@ -13,10 +12,20 @@ app.use(passport.initialize());
 app.use(express.static('node_modules'));
 app.use(express.static('public'));
 
-app.post('/login', passport.authenticate('local', {
+//takes the username and password fields from the request body and passes them to our "verify callback"
+app.post('/login', passport.authenticate('local', {  //middleware that takes two arguments (strategy)
   successRedirect: '/success',
   failureRedirect: '/login',
-  session: false
+  session: false //disable session
+}));
+
+//hard coded verify callback used to decide whether to authenticate a user or not.
+passport.use(new LocalStrategy(function(username, password, done) { //username & password comes from post route
+  if ((username === "John") && (password === "password")) {
+    return done(null, { username: username, id: 1 }); //callback function that we call to say if the authentication went OK or not
+  } else {
+    return done(null, false);
+  }
 }));
 
 app.get('/success', function (req, res) {
@@ -27,13 +36,6 @@ app.get('/login', function(req, res){
   res.sendFile(__dirname + '/public/login.html')
 });
 
-passport.use(new LocalStrategy(function(username, password, done) { //username & password comes from post route
-  if ((username === "einarzb") && (password === "6470464")) {
-    return done(null, { username: username, id: 1 }); //callback function that we call to say if the authentication went OK or not
-  } else {
-    return done(null, false);
-  }
-}));
 
 //errors
 //404 error
