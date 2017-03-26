@@ -8,6 +8,12 @@ var LocalStrategy = require('passport-local').Strategy; //The most common and tr
 //middleware
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+//must be above passport.initialize
+app.use(expressSession({ //tells express to use and configure it with secret key
+  secret:"thisIsASecret",
+  resave: false,
+  saveUninitialized: false
+  }));
 app.use(passport.initialize());
 app.use(express.static('node_modules'));
 app.use(express.static('public'));
