@@ -13,6 +13,12 @@ app.use(passport.initialize());
 app.use(express.static('node_modules'));
 app.use(express.static('public'));
 
+app.post('/login', passport.authenticate('local', {
+  successRedirect: '/success',
+  failureRedirect: '/login',
+  session: false
+}));
+
 app.get('/success', function (req, res) {
   res.send('hey, hello from the server');
 })
