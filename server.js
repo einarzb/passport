@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 var passport = require('passport');
 var bodyParser = require('body-parser');
+var LocalStrategy = require('passport-local').Strategy;
 
 //middleware
 app.use(bodyParser.urlencoded({extended: false}));
@@ -10,6 +11,14 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(express.static('node_modules'));
 app.use(express.static('public'));
+
+app.get('/success', function (req, res) {
+  res.send('hey, hello from the server');
+})
+
+app.get('/login', function(req, res){
+  res.sendFile(__dirname + '/public/login.html')
+});
 
 //errors
 //404 error
