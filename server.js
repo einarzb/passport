@@ -1,10 +1,10 @@
 //require and set up
 var express = require('express');
+var expressSession = require('express-session'); //to enable sessions in express
 var app = express();
 var passport = require('passport');
 var bodyParser = require('body-parser'); //passport use it in the background.
 var LocalStrategy = require('passport-local').Strategy; //The most common and traditional strategy simply authenticates a person using a username and a password.
-
 //middleware
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -16,7 +16,6 @@ app.use(express.static('public'));
 app.post('/login', passport.authenticate('local', {  //middleware that takes two arguments (strategy)
   successRedirect: '/success',
   failureRedirect: '/login',
-  session: false //disable session
 }));
 
 //hard coded verify callback used to decide whether to authenticate a user or not.
