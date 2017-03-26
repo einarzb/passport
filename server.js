@@ -4,6 +4,7 @@ var app = express();
 var passport = require('passport');
 var bodyParser = require('body-parser');
 var LocalStrategy = require('passport-local').Strategy;
+//The most common and traditional strategy simply authenticates a person using a username and a password.
 
 //middleware
 app.use(bodyParser.urlencoded({extended: false}));
