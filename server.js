@@ -4,7 +4,8 @@ var app = express();
 var passport = require('passport');
 var bodyParser = require('body-parser'); //passport use it in the background.
 var LocalStrategy = require('passport-local').Strategy; //The most common and traditional strategy simply authenticates a person using a username and a password.
-var expressSession = require('express-session'); //enable sessions in express
+var expressSession = require('express-session'); //enable sessions and has Express' built-in session store called MemoryStore
+//var MongoStore = require('connect-mongo')(express);
 
 //middleware
 app.use(bodyParser.urlencoded({extended: false}));
@@ -13,7 +14,8 @@ app.use(bodyParser.json());
 app.use(expressSession({ //tells express to use and configure it with secret key
   secret:"thisIsASecret",
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  //store: new MongoStore({ url: 'mongodb://localhost/logindb'})
   }));
 //defines a function on the request object named isAuthenticated()
 app.use(passport.initialize());
