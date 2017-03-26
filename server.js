@@ -15,6 +15,7 @@ app.use(expressSession({ //tells express to use and configure it with secret key
   resave: false,
   saveUninitialized: false
   }));
+//defines a function on the request object named isAuthenticated()
 app.use(passport.initialize());
 //must be added bwloe initialize
 app.use(passport.session()); //makes sure our app is using passport's session middleware
@@ -46,7 +47,12 @@ passport.use(new LocalStrategy(function(username, password, done) { //username &
 
 //routing
 app.get('/success', function (req, res){
-  res.send('Hey, ' + req.user + ', hello from the server!');
+  //validation - you can't reach success page if youre not logged in - handles unauthorized access
+  if (req.isAuthenticated()) { //passport's built-in method
+    res.send('Hey, ' + req.user + ', hello from the server!');
+  } else {
+    res.redirect('/login') //maybe redirect to sign up
+  }
 });
 
 app.get('/login', function(req, res){
