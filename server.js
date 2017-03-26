@@ -22,31 +22,38 @@ app.use(passport.session()); //makes sure our app is using passport's session mi
 app.use(express.static('node_modules'));
 app.use(express.static('public'));
 
-//when someone logs in we tell passport what information is required in order to identify a logged in user.
+//STEP 3: when someone logs in we tell passport what information is required in order to identify a logged in user.
 passport.serializeUser(function(user, done){
   done(null, user.username); //we can choose the information we want to store in the user's session
 });
 
-//hard coded verify callback used to decide whether to authenticate a user or not.
+//Our browser sends cookie data when we visit the site as part of the request headers.
+//If passport finds that the session ID sent by our browser === a session ID
+// then it needs to deserialize the data.
+passport.deserializeUser(function(user, done) { //passport decrypt user info that was stored in 'user' property
+  done(null, user);
+});
+
+//STEP 2: hard coded verify callback used to decide whether to authenticate a user or not.
 passport.use(new LocalStrategy(function(username, password, done) { //username & password comes from post route
   if ((username === "John") && (password === "password")) {
     //The user data is passed as the first parameter to the serializeUser callback function
-    return done(null, { username: username, id: 1 }); //callback function that we call to say if the authentication went OK or not
+    return done(null, { username: username, id: 1 }); //the done method will call the serializeUser callback
   } else {
     return done(null, false);
   }
 }));
 
 //routing
-app.get('/success', function (req, res) {
-  res.send('hey, hello from the server');
+app.get('/success', function (req, res){
+  res.send('Hey, ' + req.user + ', hello from the server!');
 });
 
 app.get('/login', function(req, res){
   res.sendFile(__dirname + '/public/login.html')
 });
 
-//takes the username and password fields from the request body and passes them to our "verify callback"
+//STEP 1: takes the username and password fields from the request body and passes them to our "verify callback"
 app.post('/login', passport.authenticate('local', {  //middleware that takes two arguments (strategy)
   successRedirect: '/success',
   failureRedirect: '/login',
@@ -73,3 +80,12 @@ app.use(function(err, req, res, next) {
 app.listen(8000, function () {
   console.log("authentication rocknroll 8000");
 })
+
+/*Explanation:
+A person fills out the form at localhost:8000/login, and submits.
+A POST request is sent to the server.
+On the server, the passport.authenticate middleware invokes the verify function.
+If the "login" is successful, the done method will call the serializeUser callback.
+This saves the user data in a session.
+The user will also be redirected to the /success route.
+*/
