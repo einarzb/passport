@@ -46,8 +46,9 @@ passport.use(new LocalStrategy(function(username, password, done) { //username &
 }));
 
 //routing
+//success
 app.get('/success', function (req, res){
-  //validation - you can't reach success page if youre not logged in - handles unauthorized access
+  //validation - handles unauthorized access
   if (req.isAuthenticated()) { //passport's built-in method
     res.send('Hey, ' + req.user + ', hello from the server!');
   } else {
@@ -55,8 +56,15 @@ app.get('/success', function (req, res){
   }
 });
 
+//login
 app.get('/login', function(req, res){
   res.sendFile(__dirname + '/public/login.html')
+});
+
+//logout - Passport's logout method removes the req.user property and clears the login session.
+app.get('/logout', function(req, res){
+  req.logout();
+  res.send("logged out");
 });
 
 //STEP 1: takes the username and password fields from the request body and passes them to our "verify callback"
