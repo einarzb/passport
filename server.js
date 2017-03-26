@@ -22,7 +22,6 @@ app.use(expressSession({ //tells express to use and configure it with secret key
 app.use(passport.initialize());
 //must be added bwloe initialize
 app.use(passport.session()); //makes sure our app is using passport's session middleware
-
 app.use(express.static('node_modules'));
 app.use(express.static('public'));
 
@@ -31,9 +30,7 @@ passport.serializeUser(function(user, done){
   done(null, user.username); //we can choose the information we want to store in the user's session
 });
 
-//Our browser sends cookie data when we visit the site as part of the request headers.
-//If passport finds that the session ID sent by our browser === a session ID
-// then it needs to deserialize the data.
+//If passport finds that the session ID sent by our browser === a session ID then it needs to deserialize the data.
 passport.deserializeUser(function(user, done) { //passport decrypt user info that was stored in 'user' property
   done(null, user);
 });
@@ -62,7 +59,8 @@ passport.use(new FacebookStrategy({
    }
  ));
 
-//routing
+//routing//
+//facebook
 app.get('/auth/facebook', passport.authenticate('facebook'));
 
 app.get('auth/facebook/callback',
