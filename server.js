@@ -50,45 +50,25 @@ passport.use(new LocalStrategy(function(username, password, done) { //username &
 
 //facebook authentication
 passport.use(new FacebookStrategy({
-    clientID: CONFIG.fb.appId,
-    clientSecret: CONFIG.fb.appSecret,
-    callbackURL: CONFIG.fb.callbackURL
+    clientID : FACEBOOK_APP_ID,
+    clientSecret: FACEBOOK_APP_SECRET,
+    callbackURL: 'auth/facebook/callback'
   },
   function(accessToken, refreshToken, profile, done) {
-    // asynchronous verification, for effect...
-    process.nextTick(function () {
-
-      User.findOne({ 'accounts.uid': profile.id, 'accounts.provider': 'facebook' }, function(err, olduser) {
-
-          if(olduser) {
-            done(null, olduser);
-          } else {
-            var newuser       = new User();
-            var account       = {provider: "facebook", uid: profile.id};
-            newuser.accounts.push(account);
-            newuser.firstname = profile.name.givenName;
-            newuser.lastname  = profile.name.familyName;
-            newuser.email     = "TBD...";
-
-            newuser.save(function(err) {
-              if(err) { throw err; }
-              done(null, newuser);
-            });
-          }
-        });
-    });
-  }
-));
-
+     User.findOrCreate({ 'accounts.uid': profile.id, 'accounts.provider': 'facebook' }, function(err, user) {
+       if (err) { return done(err); }
+       done(null, user);
+     });
+   }
+ ));
 
 //routing
-app.get('/facebook', passport.authenticate('facebook', {
-   scope: ['user_status', 'user_photos']
- }));
+app.get('/auth/facebook', passport.authenticate('facebook'));
 
-app.get('/facebook/callback', passport.authenticate('facebook', {
+app.get('auth/facebook/callback',
+ passport.authenticate('facebook', {
   successRedirect:  '/success',
-  failureRedirect: '/signup'
+  failureRedirect: '/login'
 }));
 
 //success

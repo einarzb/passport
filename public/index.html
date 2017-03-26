@@ -17,6 +17,7 @@
 
 <body ng-controller="mainController">
     <div class="container">
+        <!--NAV-->
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <ul class="nav navbar-nav pull-right">
@@ -64,12 +65,11 @@
                             <p class="text-center"><span style="margin-right:20px;">remember me</span>
                                 <input class="pull-left" type="checkbox" checked data-toggle="toggle" data-size="mini" data-onstyle="default"> <br>
                             </p>
-                            <button type="button" class="btn btn-link" ng-show="signUp" ng-click="signUpBtn()">don't have an account?</button> <br>
+                            don't have an account yet?<button type="button" class="btn btn-link" ng-show="signUp" ng-click="signUpBtn()"> Sign up</button> <br>
                             <input type="submit" class="btn btn-success btn-sm login" value="Log In" />
                         </form>
-
-
                     </div>
+                    <!--SIGNUP-->
                     <div class="signup" ng-hide="signUp">
                         <form action="http://localhost:8000/signup" method="post" class="text-center" ng-hide="!loginScreen">
                             <div>
@@ -94,7 +94,11 @@
                               </label>
                             </div> <br>
                             <input type="submit" class="btn btn-success btn-sm" value="Sign Up" />
-                            <button type=" button " class="pull-right " style="background-color:transparent;border:none "><img src="images/login-fb.png "/></button>
+                            <button type=" button " class="pull-right " style="background-color:transparent;border:none ">
+                              <a href="/auth/facebook">
+                                  <img src="images/login-fb.png "/>
+                              </a>
+                            </button>
                             <button type="button " class="pull-right " style="background-color:transparent;border:none;padding-right:10px; "><img src="images/google.png "/></button>
                         </form>
                     </div>
@@ -114,5 +118,6 @@
 <!--list
 modal
 toggle bootstrap
-
+facebook authentication
+angular
 -->

@@ -6,7 +6,7 @@ $scope.user;
 $scope.signUpBtn = function(){
   $scope.signUp = false;
   $scope.loginScreen = true;
-  $scope.user = req.user;
+  $scope.user = req.session.passport.user; //output user name in nav bar
 
 
 }
