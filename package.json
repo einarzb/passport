@@ -10,8 +10,10 @@
   "author": "einar barzilay",
   "license": "ISC",
   "dependencies": {
+    "angular": "^1.6.3",
     "body-parser": "^1.17.1",
     "bootstrap": "^3.3.7",
+    "bootstrap-toggle": "^2.2.2",
     "connect-mongo": "^1.3.2",
     "express": "^4.15.2",
     "express-session": "^1.15.1",

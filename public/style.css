@@ -1,0 +1,11 @@
+.modal-backdrop {
+   background-color: rgba(255, 255,255, 0.5)}
+
+.form-control {
+    width: 180px;
+    margin: 0 auto;
+}
+.login{width:270px;}
+label {
+    text-align: left;
+}
