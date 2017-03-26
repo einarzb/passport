@@ -3,4 +3,7 @@ todo:
 1. enable adding users not hardcoded
 2. create sign up
 3. make an option instead of failure --- redirect to sign up page
-4. do everything with ui-routing 
+4. do everything with ui-routing
+5. close modal doesnt work
+6. make fb and google work
+7. fix sign up
