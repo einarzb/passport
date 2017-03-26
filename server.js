@@ -15,6 +15,8 @@ app.use(expressSession({ //tells express to use and configure it with secret key
   saveUninitialized: false
   }));
 app.use(passport.initialize());
+//must be added bwloe initialize
+app.use(passport.session()); //makes sure our app is using passport's session middleware
 app.use(express.static('node_modules'));
 app.use(express.static('public'));
 
