@@ -45,6 +45,10 @@ passport.use(new LocalStrategy(function(username, password, done) { //username &
   }
 }));
 
+var FACEBOOK_APP_ID = '262419510459321',
+    FACEBOOK_APP_SECRET = 'cd473945b1f92a78e811c4b2c6c810cd';
+
+
 //facebook authentication
 passport.use(new FacebookStrategy({
     clientID : FACEBOOK_APP_ID,
