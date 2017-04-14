@@ -115,11 +115,11 @@ passport.authenticate('local', {
   failureRedirect: '/error'
 }));
 
-//logout - Passport's logout method removes the req.user property and clears the login session.
-// app.get('/logout', function(req, res){
-//   req.logout();
-//   res.send("logged out");
-// });
+//Passport's logout method removes the req.user property and clears the login session.
+app.get('/logout', function (req, res) {
+  req.logout();
+  res.send('Logged out!');
+});
 
 
 //catch-all route: - without the hash-bang, the server is handling the routing
