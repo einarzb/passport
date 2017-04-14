@@ -1,6 +1,7 @@
 body{background-color:#081F37; color:#fff }
 button:active{outline: none;}
 
+li{color:#000;}
 .well {
   background-color: rgba(10, 1, 1, 0.3);
   border: none;
