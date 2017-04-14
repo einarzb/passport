@@ -1,6 +1,7 @@
 //package requirements
 var express = require('express');
-var bodyParser = require('body-parser'); //passport use it in the background.
+//passport use it in the background.
+var bodyParser = require('body-parser');
 var passport = require('passport');
 //most common & traditional strategy to authenticates a person using username & password.
 var LocalStrategy = require('passport-local').Strategy;
@@ -17,43 +18,46 @@ var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-//must be above passport.initialize
+//express session middleware - must be placed here (above passport.initialize)
+//tells express to use it and configure with secret key
+app.use(expressSession({
+  secret:"thisIsASecret",
+  resave: false,
+  saveUninitialized: false
+  //store: new MongoStore({ url: 'mongodb://localhost/logindb'})
+}));
 
-// app.use(expressSession({ //tells express to use and configure it with secret key
-//   secret:"thisIsASecret",
-//   resave: false,
-//   saveUninitialized: false,
-//   //store: new MongoStore({ url: 'mongodb://localhost/logindb'})
-//   }));
-
-//defines a function on the request object named isAuthenticated()
 // initializes passport and tells Express we want to use it as middleware
 app.use(passport.initialize());
 
-//must be added bwloe initialize
-// app.use(passport.session()); //makes sure our app is using passport's session middleware
+//***must be placed here***
+//makes sure our app is using passport's-session middleware!
+app.use(passport.session());
+
+//STEP 3:
+//when user logs in- we tell passport what information is required in order to identify a logged-in user.
+passport.serializeUser(function(user, done){ //done - passport's callback function from **line 55**
+  done(null, user.username); //we can choose the information we want to store in the user's session
+});
+
+//if passport finds that the session ID sent by our browser === session ID - then it needs to deserialize the data.
+//passport decrypt user info that was stored in 'user' property
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
 //setup directories for server access
 app.use(express.static('node_modules'));
 app.use(express.static('public'));
 
-//STEP 3: when someone logs in we tell passport what information is required in order to identify a logged in user.
-passport.serializeUser(function(user, done){
-  done(null, user.username); //we can choose the information we want to store in the user's session
-});
-
-//If passport finds that the session ID sent by our browser === a session ID then it needs to deserialize the data.
-passport.deserializeUser(function(user, done) { //passport decrypt user info that was stored in 'user' property
-  done(null, user);
-});
-
-//STEP 2: hard coded verify callback used to decide whether to authenticate a user or not.
-//passport middleware
-passport.use(new LocalStrategy(function(username, password, done) { //verify callback function
-  //username & password comes from post route
+//STEP 2: hard coded
+//verify callback used to decide whether to authenticate a user or not.
+//passport middleware that is a verify callback function
+passport.use(new LocalStrategy(function(username, password, done) {
+  //username & password comes from /POST/ route
   if ((username === "John") && (password === "password")) {
-    //success - username is passed as the first parameter to the serializeUser callback function
-    return done(null, { username: username, id: 1 }); //done - callback function that will call the serializeUser()
+    //if success: username is passed as the first parameter to the serializeUser callback function **line 38**
+    return done(null, { username: username, id: 1 });
   } else { //false - user not exist
     return done(null, false);
   }
@@ -90,7 +94,8 @@ app.get('/public/templates/login', function(req, res) {
   res.sendFile(__dirname + '/public/templates/login.html');
 });
 
-//STEP 1: takes the username and password inputs from the request body and passes them to passport's done function
+//STEP 1:
+//takes username & password inputs from the request body and pass them to passport's done function **line 58**
 app.post('/public/templates/login',
 //passport.authenticate - middleware that takes two arguments (passport strategy, redirect routes)
 passport.authenticate('local', {
