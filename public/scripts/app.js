@@ -26,18 +26,17 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: '/templates/facebook.html',
       controller: 'authController'
     })
-    .state('/success', {
+    .state('success', {
       url: '/success',
-      templateUrl: '/templates/success.html'
+      templateUrl: '/templates/success.html',
+      controller: function($scope, $stateParams){
+        $scope.loggedUserName = $stateParams;
+      }
     })
-    .state('/error', {
+    .state('error', {
       url: '/error',
       templateUrl: '/templates/error.html'
     })
-    .state('username', {
-      url: '/success/:user', 
-      templateUrl: '/templates/success.html',
-      controller: 'navController'
-    })
+
 
 });

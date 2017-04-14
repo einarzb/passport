@@ -1,5 +1,6 @@
 //package requirements
 var express = require('express');
+var jade = require('jade');
 //passport use it in the background.
 var bodyParser = require('body-parser');
 var passport = require('passport');
@@ -96,10 +97,13 @@ app.get('/public/templates/login', function(req, res) {
 });
 
 //fetch logged in username
-app.get('/success/:user', function (req, res, next){
-        var loggedUser = req.user;
-        res.send(loggedUser)
-        console.log(loggedUser);
+app.get('/success/:user', function (req, res){
+  //checks if user object exists - if not - redirect to error page
+          if (req.isAuthenticated()) {
+           res.send('Hey, ' + req.user + ', hello from the server!');
+         } else {
+           res.redirect('/error');
+         }
     });
 
 //STEP 1:
@@ -118,6 +122,8 @@ passport.authenticate('local', {
 // });
 
 
+
+app.set('view engine', 'jade');
 
 //importent!
 app.all('*', function(req, res) {
