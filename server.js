@@ -4,8 +4,10 @@ var bodyParser = require('body-parser'); //passport use it in the background.
 var passport = require('passport');
 //most common & traditional strategy to authenticates a person using username & password.
 var LocalStrategy = require('passport-local').Strategy;
+//enable sessions and has Express' built-in session store (MemoryStore) so that user dont have to login when visiting diffe' pages
+var expressSession = require('express-session');
+
 //var FacebookStrategy = require('passport-facebook').Strategy; //facebook yeahy!
-//var expressSession = require('express-session'); //enable sessions and has Express' built-in session store called MemoryStore
 //var MongoStore = require('connect-mongo')(express);
 
 //on AIR
@@ -94,7 +96,6 @@ app.post('/public/templates/login',
 passport.authenticate('local', {
   successRedirect: '/success',
   failureRedirect: '/error'
-  //session: false
 }));
 
 //logout - Passport's logout method removes the req.user property and clears the login session.
