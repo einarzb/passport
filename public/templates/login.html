@@ -1,37 +1,13 @@
-<!-- Modal -->
-<div class="modal fade modal-admin " id="loginModal " role="dialog ">
-    <div class="modal-dialog ">
-        <div class="modal-content text-center ">
-            <div class="modal-header ">
-                <button type="button " class="close " data-dismiss="modal ">&times;</button>
-                <h2 class="modal-title text-center ">login or register with <i class="fa fa-lock " aria-hidden="true "></i>
-                </h2>
-            </div>
-            <div class="modal-body modal-md ">
-                <form class="text-center " ng-submit="getUserName()">
-                    <div>
-                        <label>Username:
-                          <i class="fa fa-user " aria-hidden="true ">
-                            <input type="text " name="username " class="form-control " />
-                          </i>
-                        </label>
-                    </div>
-                    <div>
-                        <label>Password:
-                          <i class="fa fa-lock " aria-hidden="true ">
-                        <input type="password " name="password " class="form-control " />
-                        </i>
-                        </label>
-                    </div> <br>
-                    <p class="text-center "><span style="margin-right:20px; ">remember me</span>
-                        <input class="pull-left " type="checkbox " checked data-toggle="toggle " data-size="mini " data-onstyle="default "> <br>
-                    </p>
-                    don't have an account yet?<button type="button " class="btn btn-link " ng-show="signUp " ng-click="signUpBtn() "> Sign up</button> <br>
-                    <button type="submit " class="btn btn-success btn-sm login " value="Log In ">log in</button>
-                </form>
-            </div>
-            <div class="modal-footer ">
-                <button type="button " class="btn btn-default " data-dismiss="modal ">Close</button>
-            </div>
-        </div>
-    </div>
+<div class="well">
+
+    <h2 class="text-center ">login <i class="fa fa-lock " aria-hidden="true "></i></h2>
+    <form class="text-center " ng-submit="getUserName()">
+        <label>Username:<i class="fa fa-user " aria-hidden="true "></i></label>
+        <input type="text " name="username " class="form-control " />
+        <label>Password:<i class="fa fa-lock " aria-hidden="true ">  </i> </label>
+        <input type="password " name="password " class="form-control " /> remember me
+        <input type="checkbox" checked data-toggle="toggle" data-size="mini" data-onstyle="default"> <br> don't have an account yet?
+        <a class="btn btn-link" ui-sref="register"> Sign up</a> <br>
+        <button type="submit " class="btn btn-success btn-sm login"> login</button>
+    </form>
+</div>
