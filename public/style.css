@@ -1,4 +1,8 @@
+body{background-color:#081F37; }
 
+.well {
+  opacity: 0.8;
+}
 .fa,  .fa-user{
   margin-top: 17px;
 }
@@ -10,7 +14,7 @@
     width: 180px;
     margin: 0 auto;
 }
-.login{width:270px;}
+.login{width:200px;}
 label {
     text-align: left;
 }
