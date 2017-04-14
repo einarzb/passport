@@ -48,36 +48,39 @@ passport.use(new LocalStrategy(function(username, password, done) { //username &
 var FACEBOOK_APP_ID = '262419510459321',
     FACEBOOK_APP_SECRET = 'cd473945b1f92a78e811c4b2c6c810cd';
 
+var fbOpts = {
+  clientID : FACEBOOK_APP_ID,
+  clientSecret: FACEBOOK_APP_SECRET,
+  callbackURL: 'http://localhost:8000/auth/facebook/callback'
+};
+
+var fbCallback = function(accessToken, refreshToken, profile, cb){
+console.log(accessToken, refreshToken, profile, cb);
+}
 
 //facebook authentication
-passport.use(new FacebookStrategy({
-    clientID : FACEBOOK_APP_ID,
-    clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: 'auth/facebook/callback'
-  },
-  function(accessToken, refreshToken, profile, done) {
-     User.findOrCreate({ 'accounts.uid': profile.id, 'accounts.provider': 'facebook' }, function(err, user) {
-       if (err) { return done(err); }
-       done(null, user);
-     });
-   }
- ));
+passport.use(new FacebookStrategy(fbOpts, fbCallback));
 
 //routing//
 //facebook
-app.get('/auth/facebook', passport.authenticate('facebook'));
+app.route('/')
+.get(passport.authenticate('facebook'));
 
-app.get('auth/facebook/callback',
- passport.authenticate('facebook', {
-  successRedirect:  '/success',
-  failureRedirect: '/login'
-}));
+app.route('auth/facebook/callback')
+ .get(passport.authenticate('facebook',function (err, user, info){
+   console.log(err, user, info);
+ }));
 
 //success
+
 app.get('/success', function (req, res){
   //validation - handles unauthorized access
   if (req.isAuthenticated()) { //passport's built-in method
-    res.send('Hey, ' + req.user + ', hello from the server!');
+
+    // console.log(req.user);
+    //res.send('Hey, ' + req.user + ', hello from the server!');
+    res.redirect('/?username='+req.user) //maybe redirect to sign up
+
   } else {
     res.redirect('/login') //maybe redirect to sign up
   }
