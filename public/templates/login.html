@@ -1,13 +1,13 @@
 <div class="well">
 
     <h2 class="text-center ">login <i class="fa fa-lock " aria-hidden="true "></i></h2>
-    <form class="text-center " ng-submit="getUserName()">
+    <form class="text-center " ng-submit="getUserName(logUser)">
         <label>Username:<i class="fa fa-user " aria-hidden="true "></i>
-              <input type="text " name="username " class="form-control " />
+              <input type="text" ng-model="logUser.name" name="username " class="form-control " />
         </label>
 
         <label>Password:<i class="fa fa-lock " aria-hidden="true ">  </i>
-            <input type="password " name="password " class="form-control"/>
+            <input type="password" ng-model="logUser.password" class="form-control"/>
         </label>
         remember me
         <input type="checkbox" checked data-toggle="toggle" data-size="mini" data-onstyle="default"> <br>

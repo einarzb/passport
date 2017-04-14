@@ -86,10 +86,7 @@ app.get('/success', function (req, res){
   }
 });
 
-//login
-app.get('/login', function(req, res){
-  res.sendFile(__dirname + '/public/login.html')
-});
+
 
 //logout - Passport's logout method removes the req.user property and clears the login session.
 app.get('/logout', function(req, res){
@@ -108,6 +105,15 @@ app.post('/register', passport.authenticate('local', {  //middleware that takes 
   failureRedirect: '/login',
 }));
 
+// //login
+// app.get('/login', function(req, res){
+//   res.sendFile(__dirname + '/public/templates/login.html')
+// });
+
+//importent!
+app.all('*', function(req, res) {
+  res.sendFile(__dirname + "/public/index.html")
+});
 
 //errors
 //404 error
