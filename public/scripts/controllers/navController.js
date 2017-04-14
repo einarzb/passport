@@ -1,7 +1,10 @@
 app.controller('NavCtrl', function($scope, $http, $location) {
 
-//hide log in and register buttons 
+//maybe in resolve
 
+//hide log in and register buttons
+
+//show log out button
 
   //getting user name (yohai help)
   $scope.user = getParameterByName('username');
