@@ -10,6 +10,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: '/templates/partial-home.html',
       controller: 'mainController'
     })
+
     .state('login', {
       url: '/login',
       templateUrl: '/templates/login.html',
@@ -27,11 +28,16 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('/success', {
       url: '/success',
-      templateUrl: '/templates/success.html',
+      templateUrl: '/templates/success.html'
     })
     .state('/error', {
       url: '/error',
-      templateUrl: '/templates/error.html',
+      templateUrl: '/templates/error.html'
+    })
+    .state('username', {
+      url: '/success/:user', 
+      templateUrl: '/templates/success.html',
+      controller: 'navController'
     })
 
 });

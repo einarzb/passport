@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 //express session middleware - must be placed here (above passport.initialize)
-//tells express to use it and configure with secret key
+//tells express to use it and configure with secret key which create cookie!!
 app.use(expressSession({
   secret:"thisIsASecret",
   resave: false,
@@ -37,11 +37,12 @@ app.use(passport.session());
 //STEP 3:
 //when user logs in- we tell passport what information is required in order to identify a logged-in user.
 passport.serializeUser(function(user, done){ //done - passport's callback function from **line 55**
+//session is being created
   done(null, user.username); //we can choose the information we want to store in the user's session
 });
 
-//if passport finds that the session ID sent by our browser === session ID - then it needs to deserialize the data.
-//passport decrypt user info that was stored in 'user' property
+//if passport finds that the session ID (cookie) sent by our browser === session ID(cookie) -
+//then it needs to deserialize the data (decrypt user info that was stored in 'user' property)
 passport.deserializeUser(function(user, done) {
   done(null, user);
 });
@@ -93,6 +94,13 @@ passport.use(new LocalStrategy(function(username, password, done) {
 app.get('/public/templates/login', function(req, res) {
   res.sendFile(__dirname + '/public/templates/login.html');
 });
+
+//fetch logged in username
+app.get('/success/:user', function (req, res, next){
+        var loggedUser = req.user;
+        res.send(loggedUser)
+        console.log(loggedUser);
+    });
 
 //STEP 1:
 //takes username & password inputs from the request body and pass them to passport's done function **line 58**
