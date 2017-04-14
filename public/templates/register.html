@@ -1,23 +1,23 @@
 <!--SIGNUP-->
-    <form class="text-center" ng-submit="register()">
+    <form class="text-center" ng-submit="register(newUser)">
         <div>
             <label>Username:
                 <i class="fa fa-user " aria-hidden="true ">
-                  <input type="text " name="username " class="form-control " />
+                  <input type="text " name="username" ng-model="newUser.name" class="form-control " />
                 </i>
             </label>
         </div>
         <div>
             <label>Password:
                 <i class="fa fa-lock " aria-hidden="true ">
-                  <input type="password " name="password " class="form-control " />
+                  <input type="password" ng-model="newUser.password" class="form-control " />
                 </i>
             </label>
         </div>
         <div>
             <label>Confirm Password:
                 <i class="fa fa-lock " aria-hidden="true ">
-                  <input type="password " name="passwordConfirm " class="form-control " />
+                  <input type="password" ng-model="newUser.passwordConfirm" class="form-control " />
                 </i>
            </label>
         </div> <br>
