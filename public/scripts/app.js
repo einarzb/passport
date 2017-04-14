@@ -29,5 +29,9 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/success',
       templateUrl: '/templates/success.html',
     })
+    .state('/error', {
+      url: '/error',
+      templateUrl: '/templates/error.html',
+    })
 
 });
