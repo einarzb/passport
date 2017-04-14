@@ -25,5 +25,13 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: '/templates/facebook.html',
       controller: 'authController'
     })
+    .state('/success', {
+      url: '/success',
+      templateUrl: '/templates/success.html',
+    })
+    .state('/error', {
+      url: '/error',
+      templateUrl: '/templates/error.html',
+    })
 
 });
