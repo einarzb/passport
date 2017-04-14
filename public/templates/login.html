@@ -2,11 +2,16 @@
 
     <h2 class="text-center ">login <i class="fa fa-lock " aria-hidden="true "></i></h2>
     <form class="text-center " ng-submit="getUserName()">
-        <label>Username:<i class="fa fa-user " aria-hidden="true "></i></label>
-        <input type="text " name="username " class="form-control " />
-        <label>Password:<i class="fa fa-lock " aria-hidden="true ">  </i> </label>
-        <input type="password " name="password " class="form-control " /> remember me
-        <input type="checkbox" checked data-toggle="toggle" data-size="mini" data-onstyle="default"> <br> don't have an account yet?
+        <label>Username:<i class="fa fa-user " aria-hidden="true "></i>
+              <input type="text " name="username " class="form-control " />
+        </label>
+
+        <label>Password:<i class="fa fa-lock " aria-hidden="true ">  </i>
+            <input type="password " name="password " class="form-control"/>
+        </label>
+        remember me
+        <input type="checkbox" checked data-toggle="toggle" data-size="mini" data-onstyle="default"> <br>
+        don't have an account yet?
         <a class="btn btn-link" ui-sref="register"> Sign up</a> <br>
         <button type="submit " class="btn btn-success btn-sm login"> login</button>
     </form>

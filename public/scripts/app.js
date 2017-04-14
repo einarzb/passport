@@ -20,5 +20,10 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: '/templates/register.html',
       controller: 'mainController'
     })
+    .state('/auth/facebook', {
+      url: '/auth/facebook',
+      templateUrl: '/templates/facebook.html',
+      controller: 'authController'
+    })
 
 });

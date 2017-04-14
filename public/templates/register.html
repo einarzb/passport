@@ -1,37 +1,40 @@
 <!--SIGNUP-->
-<div class="signup">
-    </h1>sign up</h1>
     <form class="text-center" ng-submit="register()">
         <div>
             <label>Username:
-                        <i class="fa fa-user " aria-hidden="true ">
-                          <input type="text " name="username " class="form-control " />
-                        </i>
-                      </label>
+                <i class="fa fa-user " aria-hidden="true ">
+                  <input type="text " name="username " class="form-control " />
+                </i>
+            </label>
         </div>
         <div>
             <label>Password:
-                        <i class="fa fa-lock " aria-hidden="true ">
-                      <input type="password " name="password " class="form-control " />
-                      </i>
-                      </label>
+                <i class="fa fa-lock " aria-hidden="true ">
+                  <input type="password " name="password " class="form-control " />
+                </i>
+            </label>
         </div>
         <div>
             <label>Confirm Password:
-                        <i class="fa fa-lock " aria-hidden="true ">
-                      <input type="password " name="passwordConfirm " class="form-control " />
-                      </i>
-                      </label>
+                <i class="fa fa-lock " aria-hidden="true ">
+                  <input type="password " name="passwordConfirm " class="form-control " />
+                </i>
+           </label>
         </div> <br>
-        <input type="submit " class="btn btn-success btn-sm " value="Sign Up " />
+
+        <button type="submit " class="btn btn-success btn-sm "/>submit</button>
+        <hr>
         <!--SOCIAL-->
-        <button type=" button " class="pull-right " style="background-color:transparent;border:none ">
-                      <a href="/auth/facebook ">
+        <div class="social">
+          <p>or login with social</p>
+                <button type="button" class="pull-right " style="background-color:transparent;border:none ">
+                      <a ui-sref="/auth/facebook">
                           <img src="images/login-fb.png "/>
                       </a>
-                    </button>
-        <button type="button " class="pull-right " style="background-color:transparent;border:none;padding-right:10px; ">
+                </button>
+                <button type="button " class="pull-right " style="background-color:transparent;border:none;padding-right:10px; ">
                       <img src="images/google.png "/>
-                    </button>
+                </button>
+       </div>
+
     </form>
-</div>
