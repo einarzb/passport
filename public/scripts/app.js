@@ -1,1 +1,1 @@
-var app = angular.module('loginApp', ['ui-router']);
+var app = angular.module('loginApp', ['ui.router']);
