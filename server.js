@@ -103,7 +103,7 @@ app.post('/login', passport.authenticate('local', {  //middleware that takes two
   failureRedirect: '/login',
 }));
 
-app.post('/signup', passport.authenticate('local', {  //middleware that takes two arguments (strategy)
+app.post('/register', passport.authenticate('local', {  //middleware that takes two arguments (strategy)
   successRedirect: '/success',
   failureRedirect: '/login',
 }));
