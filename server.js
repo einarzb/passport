@@ -1,12 +1,15 @@
-//require and set up
+//package requirements
 var express = require('express');
-var app = express();
-var passport = require('passport');
 var bodyParser = require('body-parser'); //passport use it in the background.
+var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy; //The most common and traditional strategy simply authenticates a person using a username and a password.
-var FacebookStrategy = require('passport-facebook').Strategy; //facebook yeahy!
+//var FacebookStrategy = require('passport-facebook').Strategy; //facebook yeahy!
 var expressSession = require('express-session'); //enable sessions and has Express' built-in session store called MemoryStore
 //var MongoStore = require('connect-mongo')(express);
+
+//on AIR
+var app = express();
+
 
 //middleware
 app.use(bodyParser.urlencoded({extended: false}));
@@ -45,31 +48,31 @@ passport.use(new LocalStrategy(function(username, password, done) { //username &
   }
 }));
 
-var FACEBOOK_APP_ID = '262419510459321',
-    FACEBOOK_APP_SECRET = 'cd473945b1f92a78e811c4b2c6c810cd';
-
-var fbOpts = {
-  clientID : FACEBOOK_APP_ID,
-  clientSecret: FACEBOOK_APP_SECRET,
-  callbackURL: 'http://localhost:8000/auth/facebook/callback'
-};
-
-var fbCallback = function(accessToken, refreshToken, profile, cb){
-console.log(accessToken, refreshToken, profile, cb);
-}
-
-//facebook authentication
-passport.use(new FacebookStrategy(fbOpts, fbCallback));
-
-//routing//
-//facebook
-app.route('/')
-.get(passport.authenticate('facebook'));
-
-app.route('auth/facebook/callback')
- .get(passport.authenticate('facebook',function (err, user, info){
-   console.log(err, user, info);
- }));
+// var FACEBOOK_APP_ID = '262419510459321',
+//     FACEBOOK_APP_SECRET = 'cd473945b1f92a78e811c4b2c6c810cd';
+//
+// var fbOpts = {
+//   clientID : FACEBOOK_APP_ID,
+//   clientSecret: FACEBOOK_APP_SECRET,
+//   callbackURL: 'http://localhost:8000/auth/facebook/callback'
+// };
+//
+// var fbCallback = function(accessToken, refreshToken, profile, cb){
+// console.log(accessToken, refreshToken, profile, cb);
+// }
+//
+// //facebook authentication
+// passport.use(new FacebookStrategy(fbOpts, fbCallback));
+//
+// //routing//
+// //facebook
+// app.route('/')
+// .get(passport.authenticate('facebook'));
+//
+// app.route('auth/facebook/callback')
+//  .get(passport.authenticate('facebook',function (err, user, info){
+//    console.log(err, user, info);
+//  }));
 
 //success
 
