@@ -1,6 +1,5 @@
 //package requirements
 var express = require('express');
-var jade = require('jade');
 //passport use it in the background.
 var bodyParser = require('body-parser');
 var passport = require('passport');
@@ -96,7 +95,8 @@ app.get('/public/templates/login', function(req, res) {
   res.sendFile(__dirname + '/public/templates/login.html');
 });
 
-//fetch logged in username
+//fetch logged-in username
+//user is path parameter
 app.get('/success/:user', function (req, res){
   //checks if user object exists - if not - redirect to error page
           if (req.isAuthenticated()) {
@@ -111,7 +111,7 @@ app.get('/success/:user', function (req, res){
 app.post('/public/templates/login',
 //passport.authenticate - middleware that takes two arguments (passport strategy, redirect routes)
 passport.authenticate('local', {
-  successRedirect: '/success',
+  successRedirect: '/success/:user',
   failureRedirect: '/error'
 }));
 
@@ -122,10 +122,8 @@ passport.authenticate('local', {
 // });
 
 
-
-app.set('view engine', 'jade');
-
-//importent!
+//catch-all route: - without the hash-bang, the server is handling the routing
+//ensure that any unhandled requests are served by simply sending index.html.
 app.all('*', function(req, res) {
   res.sendFile(__dirname + "/public/index.html")
 });
