@@ -1,14 +1,13 @@
-body{background-color:#081F37; }
+body{background-color:#081F37; color:#fff }
+button:active{outline: none;}
 
 .well {
-  opacity: 0.8;
+  background-color: rgba(10, 1, 1, 0.3);
+  border: none;
 }
 .fa,  .fa-user{
   margin-top: 17px;
 }
-
-.modal-backdrop {
-   background-color: rgba(255, 255,255, 0.5)}
 
 .form-control {
     width: 180px;
@@ -17,4 +16,5 @@ body{background-color:#081F37; }
 .login{width:200px;}
 label {
     text-align: left;
+    font-weight: normal;
 }
