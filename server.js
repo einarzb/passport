@@ -1,30 +1,39 @@
 //package requirements
 var express = require('express');
-//passport use it in the background.
-var bodyParser = require('body-parser');
+var expressSession = require('express-session'); //enable sessions
+var bodyParser = require('body-parser');//passport use it in the background.
 var passport = require('passport');
-//most common & traditional strategy to authenticates a person using username & password.
-var LocalStrategy = require('passport-local').Strategy;
-//enable sessions and has Express' built-in session store (MemoryStore) so that user dont have to login when visiting diffe' pages
-var expressSession = require('express-session');
-var MongoStore = require('connect-mongo')(express);
+var LocalStrategy = require('passport-local').Strategy;//most common & traditional strategy to authenticates a person using username & password.
+var mongoose = require('mongoose');
 
+//routing requirements
+var userRoutes = require('./routes/userRoutes');
+//mongoose models
+var User = require('./models/userModel');
 //var FacebookStrategy = require('passport-facebook').Strategy; //facebook yeahy!
 
 //on AIR
 var app = express();
+mongoose.connect('mongodb://localhost/usersdb', function(err){
+  if (err) throw err;
+});
 
 //middleware
-app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
-//express session middleware - must be placed here (above passport.initialize)
-//tells express to use it and configure with secret key which create cookie!!
+//setup directories for server access
+app.use(express.static('node_modules'));
+app.use(express.static('public'));
+
+//serve routings
+app.use('/auth', userRoutes);
+
+//Configure passport with secret key which create cookie!! and session middleware
 app.use(expressSession({
   secret:"thisIsASecret",
   resave: false,
   saveUninitialized: false
-  //store: new MongoStore({ url: 'mongodb://localhost/logindb'})
 }));
 
 // initializes passport and tells Express we want to use it as middleware
@@ -34,35 +43,12 @@ app.use(passport.initialize());
 //makes sure our app is using passport's-session middleware!
 app.use(passport.session());
 
-//STEP 3:
-//when user logs in- we tell passport what information is required in order to identify a logged-in user.
-passport.serializeUser(function(user, done){ //done - passport's callback function from **line 55**
-//session is being created
-  done(null, user.username); //we can choose the information we want to store in the user's session
-});
+// Configure passport-local to use user model for authentication
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-//if passport finds that the session ID (cookie) sent by our browser === session ID(cookie) -
-//then it needs to deserialize the data (decrypt user info that was stored in 'user' property)
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
 
-//setup directories for server access
-app.use(express.static('node_modules'));
-app.use(express.static('public'));
-
-//STEP 2: hard coded
-//verify callback used to decide whether to authenticate a user or not.
-//passport middleware that is a verify callback function
-passport.use(new LocalStrategy(function(username, password, done) {
-  //username & password comes from /POST/ route
-  if ((username === "John") && (password === "password")) {
-    //if success: username is passed as the first parameter to the serializeUser callback function **line 38**
-    return done(null, { username: username, id: 1 });
-  } else { //false - user not exist
-    return done(null, false);
-  }
-}));
 
 // var FACEBOOK_APP_ID = '262419510459321',
 //     FACEBOOK_APP_SECRET = 'cd473945b1f92a78e811c4b2c6c810cd';
@@ -90,36 +76,6 @@ passport.use(new LocalStrategy(function(username, password, done) {
 //    console.log(err, user, info);
 //  }));
 
-//A server route that serve the login form
-app.get('/public/templates/login', function(req, res) {
-  res.sendFile(__dirname + '/public/templates/login.html');
-});
-
-//fetch logged-in username
-//user is path parameter
-app.get('/success/:user', function (req, res){
-  //checks if user object exists - if not - redirect to error page
-          if (req.isAuthenticated()) {
-           res.send('Hey, ' + req.user + ', hello from the server!');
-         } else {
-           res.redirect('/error');
-         }
-    });
-
-//STEP 1:
-//takes username & password inputs from the request body and pass them to passport's done function **line 58**
-app.post('/public/templates/login',
-//passport.authenticate - middleware that takes two arguments (passport strategy, redirect routes)
-passport.authenticate('local', {
-  successRedirect: '/success/:user',
-  failureRedirect: '/error'
-}));
-
-//Passport's logout method removes the req.user property and clears the login session.
-app.get('/logout', function (req, res) {
-  req.logout();
-  res.send('Logged out!');
-});
 
 
 //catch-all route: - without the hash-bang, the server is handling the routing
