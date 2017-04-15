@@ -11,28 +11,42 @@
                     <div class="col-md-9">
                       <input type="text " name="username" placeholder="user name" ng-model="newUser.username" ng-minlength="2" class="form-control" required/>
                     </div>
-              </div> <br>
+                    <div ng-messages="registerForm.username.$error" style="color:maroon;padding-left:30px;" role="alert">
+                        <div ng-message="required"> please fill in name </div>
+                        <div ng-message="minlength"> your name is too short </div>
+                    </div>
+              </div>
+               <br>
               <div class="row">
                 <div class="col-md-3 col-md-push-3" style="font-size:1.3em;margin-top:-10px;">
                           <i class="fa fa-lock " aria-hidden="true"></i>
                       </div>
                       <div class="col-md-9">
-                          <input type="password" placeholder="password" name="password" ng-model="newUser.password" class="form-control"/>
+                          <input type="password" placeholder="password" name="password" ng-pattern="/^(?=.*[a-z])(?=.*\d)(?=.*[A-Z]).{6,16}$/"
+ ng-model="newUser.password" class="form-control" required/>
                       </div>
-              </div> <br>
+                      <div ng-messages="registerForm.password.$error" style="color:maroon;padding-left:80px;" role="alert">
+                          <div ng-message="required"> please fill in password </div>
+                          <div ng-message="pattern">Password must be 6 characters including 1 uppercase letter, and include number</div>
+                      </div>
+              </div>
+              <br>
               <div class="row">
                 <div class="col-md-3 col-md-push-3" style="font-size:1.3em;margin-top:-10px;">
                     <i class="fa fa-repeat " aria-hidden="true"></i>
                 </div>
                 <div class="col-md-9">
-                        <input type="password" placeholder="repeat password" name="passwordConfirm" ng-model="newUser.passwordConfirm" class="form-control"/>
+                        <input type="password" placeholder="repeat password" name="passwordConfirm" ng-pattern="/\b{{password}}\b/" ng-model="newUser.passwordConfirm" class="form-control" required/>
                 </div>
-              </div><br>
-              <br>
-              <div ng-messages="registerForm.username.$error" style="color:maroon" role="alert">
-                  <div ng-message="required"> please fill in field </div>
-                  <div ng-message="minlength"> your name is too short </div>
+                <div ng-messages="registerForm.passwordConfirm.$error" style="color:maroon;padding-left:80px;" role="alert">
+                    <div ng-message="required"> please fill in password </div>
+                    <div ng-message="pattern"> passwords must match</div>
+
+                </div>
               </div>
+              <br>
+              <br>
+
                 <hr>
                   <button type="submit" class="btn btn-success btn-sm login"/>submit</button>
       </div>
