@@ -1,5 +1,5 @@
 <!--SIGNUP-->
-    <form class="text-center" ng-submit="register(newUser)">
+    <form name="registerForm" class="text-center" ng-submit="register(newUser)">
       <div class="row well">
         <div class="col-md-12">
               <h2>register</h2> <br>
@@ -9,7 +9,7 @@
                     <i class="fa fa-user " aria-hidden="true"></i>
                 </div>
                     <div class="col-md-9">
-                      <input type="text " name="username" placeholder="user name" ng-model="newUser.username" class="form-control"/>
+                      <input type="text " name="username" placeholder="user name" ng-model="newUser.username" ng-minlength="2" class="form-control" required/>
                     </div>
               </div> <br>
               <div class="row">
@@ -25,11 +25,16 @@
                     <i class="fa fa-repeat " aria-hidden="true"></i>
                 </div>
                 <div class="col-md-9">
-                        <input type="password" placeholder="repeat password" name="passwordConfirm" ng-model="newUser.passwordConfirm" class="form-control" />
-                    </div>
-              </div> <br>
+                        <input type="password" placeholder="repeat password" name="passwordConfirm" ng-model="newUser.passwordConfirm" class="form-control"/>
+                </div>
+              </div><br>
+              <br>
+              <div ng-messages="registerForm.username.$error" style="color:maroon" role="alert">
+                  <div ng-message="required"> please fill in field </div>
+                  <div ng-message="minlength"> your name is too short </div>
+              </div>
                 <hr>
-                  <button type="submit" class="btn btn-success btn-sm "/>submit</button>
+                  <button type="submit" class="btn btn-success btn-sm login"/>submit</button>
       </div>
     </div>
 

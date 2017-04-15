@@ -14,7 +14,8 @@ li{color:#000;}
     width: 180px;
     margin: 0 auto;
 }
-.login{width:200px;}
+.login{width:200px;font-size: 1.1em}
+.error{color:red;}
 label {
     text-align: left;
     font-weight: normal;

@@ -1,4 +1,4 @@
-var app = angular.module('loginApp', ['ui.router']);
+var app = angular.module('loginApp', ['ui.router', 'ngMessages']);
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   $urlRouterProvider.otherwise('home');
