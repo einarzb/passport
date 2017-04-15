@@ -1,22 +1,37 @@
 <!--SIGNUP-->
     <form class="text-center" ng-submit="register(newUser)">
-      <div class="well">
-        <h2>register</h2>
-        <div>
-            <label>Username:<i class="fa fa-user " aria-hidden="true "></i></label>
-            <input type="text " name="username" ng-model="newUser.username" class="form-control"/>
-        </div>
-        <div>
-            <label>Password:<i class="fa fa-lock " aria-hidden="true"></i></label>
-              <input type="password" ng-model="newUser.password" class="form-control"/>
-        </div>
-        <div>
-            <label>Confirm Password:<i class="fa fa-lock " aria-hidden="true ">  </i> </label>
-              <input type="password" ng-model="newUser.passwordConfirm" class="form-control " />
-        </div>
-          <hr>
-            <button type="submit" class="btn btn-success btn-sm "/>submit</button>
+      <div class="row well">
+        <div class="col-md-12">
+              <h2>register</h2> <br>
+
+              <div class="row">
+                <div class="col-md-3 col-md-push-3" style="font-size:1.3em;margin-top:-10px;">
+                    <i class="fa fa-user " aria-hidden="true"></i>
+                </div>
+                    <div class="col-md-9">
+                      <input type="text " name="username" placeholder="user name" ng-model="newUser.username" class="form-control"/>
+                    </div>
+              </div> <br>
+              <div class="row">
+                <div class="col-md-3 col-md-push-3" style="font-size:1.3em;margin-top:-10px;">
+                          <i class="fa fa-lock " aria-hidden="true"></i>
+                      </div>
+                      <div class="col-md-9">
+                          <input type="password" placeholder="password" name="password" ng-model="newUser.password" class="form-control"/>
+                      </div>
+              </div> <br>
+              <div class="row">
+                <div class="col-md-3 col-md-push-3" style="font-size:1.3em;margin-top:-10px;">
+                    <i class="fa fa-repeat " aria-hidden="true"></i>
+                </div>
+                <div class="col-md-9">
+                        <input type="password" placeholder="repeat password" name="passwordConfirm" ng-model="newUser.passwordConfirm" class="form-control" />
+                    </div>
+              </div> <br>
+                <hr>
+                  <button type="submit" class="btn btn-success btn-sm "/>submit</button>
       </div>
+    </div>
 
         <!--SOCIAL-->
         <div class="row">
