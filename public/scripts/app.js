@@ -31,12 +31,9 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
       controller: 'authController'
     })
     .state('success', {
-      url: '/success/:user',
+      url: '/success/',
       templateUrl: '/templates/success.html',
-      //$stateParams is an object that can take both path and query parameters from the URL.
-      controller: function($scope, $stateParams){
-        $scope.loggedUserName = $stateParams;
-      }
+      controller: 'authController'
     })
     .state('error', {
       url: '/error',

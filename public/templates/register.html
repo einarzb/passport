@@ -1,5 +1,5 @@
 <!--SIGNUP-->
-    <form name="registerForm" class="text-center" ng-submit="register(newUser)">
+    <form name="registerForm" class="text-center" ng-submit="register()">
       <div class="row well">
         <div class="col-md-12">
               <h2>register</h2> <br>
@@ -9,7 +9,7 @@
                     <i class="fa fa-user " aria-hidden="true"></i>
                 </div>
                     <div class="col-md-9">
-                      <input type="text " name="username" placeholder="user name" ng-model="newUser.username" ng-minlength="2" class="form-control" required/>
+                      <input type="text " name="username" placeholder="user name" ng-model="user.username" ng-minlength="2" class="form-control" required/>
                     </div>
                     <div ng-messages="registerForm.username.$error" style="color:maroon;padding-left:30px;" role="alert">
                         <div ng-message="required"> please fill in name </div>
@@ -23,7 +23,7 @@
                       </div>
                       <div class="col-md-9">
                           <input type="password" placeholder="password" name="password" ng-pattern="/^(?=.*[a-z])(?=.*\d)(?=.*[A-Z]).{6,16}$/"
- ng-model="newUser.password" class="form-control" required/>
+ ng-model="user.password" class="form-control" required/>
                       </div>
                       <div ng-messages="registerForm.password.$error" style="color:maroon;padding-left:80px;" role="alert">
                           <div ng-message="required"> please fill in password </div>
@@ -36,7 +36,7 @@
                     <i class="fa fa-repeat " aria-hidden="true"></i>
                 </div>
                 <div class="col-md-9">
-                        <input type="password" placeholder="repeat password" name="passwordConfirm" ng-pattern="{{newUser.password}}" ng-model="newUser.passwordConfirm" class="form-control" required/>
+                        <input type="password" placeholder="repeat password" name="passwordConfirm" ng-pattern="{{user.password}}" ng-model="user.passwordConfirm" class="form-control" required/>
                 </div>
                 <div ng-messages="registerForm.passwordConfirm.$error" style="color:maroon;padding-left:80px;" role="alert">
                     <div ng-message="required"> please fill in password </div>

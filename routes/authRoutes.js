@@ -1,6 +1,7 @@
 var express = require('express');
-var router = express.Router();
 var passport = require('passport');
+var router = express.Router();
+
 //mongoose model
 var User = require('../models/userModel');
 
@@ -24,7 +25,7 @@ router.post('/register', function(req, res, next) {
               if (err) {
                 return next(err);
             }//if login success -> send user name
-            res.send(req.user);
+            res.send(req.user.username);
           });
       });
   });
