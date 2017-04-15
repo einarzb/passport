@@ -7,7 +7,7 @@ const LocalStrategy = require('passport-local').Strategy;//most common & traditi
 const mongoose = require('mongoose');
 
 //routing requirements
-const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 //mongoose models
 const User = require('./models/userModel');
@@ -29,7 +29,7 @@ app.use(express.static('node_modules'));
 app.use(express.static('public'));
 
 //serve routings
-app.use('/auth', userRoutes);
+app.use('/auth', authRoutes);
 
 //Configure passport with secret key which create cookie!! and session middleware
 app.use(expressSession({
