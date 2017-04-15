@@ -7,8 +7,9 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 //enable sessions and has Express' built-in session store (MemoryStore) so that user dont have to login when visiting diffe' pages
 var expressSession = require('express-session');
+var mongoose = require('mongoose');
 //mongoose model
-var User = require('./scripts/models/userModel')
+var User = require('./public/scripts/models/userModel')
 //var FacebookStrategy = require('passport-facebook').Strategy; //facebook yeahy!
 
 //on AIR
