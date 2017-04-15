@@ -29,7 +29,7 @@ app.use(express.static('node_modules'));
 app.use(express.static('public'));
 
 //serve routings
-app.use('/auth', authRoutes);
+app.use('/users', authRoutes);
 
 //Configure passport with secret key which create cookie!! and session middleware
 app.use(expressSession({

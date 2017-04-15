@@ -1,4 +1,4 @@
-var app = angular.module('loginApp', ['ui.router']);
+var app = angular.module('loginApp', ['ui.router', 'ngMessages']);
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   $urlRouterProvider.otherwise('home');
@@ -10,6 +10,13 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: '/templates/partial-home.html',
       controller: 'mainController'
     })
+    //authentication states//
+    .state('register', {
+      url: '/register',
+      templateUrl: '/templates/register.html',
+      controller: 'authController'
+    })
+
     .state('login', {
       url: '/login',
       templateUrl: '/templates/login.html',
@@ -18,23 +25,15 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('logout', {
       url: '/logout'
     })
-    .state('register', {
-      url: '/register',
-      templateUrl: '/templates/register.html',
-      controller: 'mainController'
-    })
     .state('/auth/facebook', {
       url: '/auth/facebook',
       templateUrl: '/templates/facebook.html',
       controller: 'authController'
     })
     .state('success', {
-      url: '/success/:user',
+      url: '/success/',
       templateUrl: '/templates/success.html',
-      //$stateParams is an object that can take both path and query parameters from the URL.
-      controller: function($scope, $stateParams){
-        $scope.loggedUserName = $stateParams;
-      }
+      controller: 'authController'
     })
     .state('error', {
       url: '/error',
