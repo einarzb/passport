@@ -1,19 +1,21 @@
 //package requirements
-var express = require('express');
-var expressSession = require('express-session'); //enable sessions
-var bodyParser = require('body-parser');//passport use it in the background.
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;//most common & traditional strategy to authenticates a person using username & password.
-var mongoose = require('mongoose');
+const express = require('express');
+const expressSession = require('express-session'); //enable sessions
+const bodyParser = require('body-parser');//passport use it in the background.
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;//most common & traditional strategy to authenticates a person using username & password.
+const mongoose = require('mongoose');
 
 //routing requirements
-var userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
+
 //mongoose models
-var User = require('./models/userModel');
+const User = require('./models/userModel');
+
 //var FacebookStrategy = require('passport-facebook').Strategy; //facebook yeahy!
 
 //on AIR
-var app = express();
+const app = express();
 mongoose.connect('mongodb://localhost/usersdb', function(err){
   if (err) throw err;
 });
@@ -27,7 +29,7 @@ app.use(express.static('node_modules'));
 app.use(express.static('public'));
 
 //serve routings
-app.use('/auth', userRoutes);
+app.use('/auth', authRoutes);
 
 //Configure passport with secret key which create cookie!! and session middleware
 app.use(expressSession({
@@ -38,12 +40,10 @@ app.use(expressSession({
 
 // initializes passport and tells Express we want to use it as middleware
 app.use(passport.initialize());
-
-//***must be placed here***
 //makes sure our app is using passport's-session middleware!
 app.use(passport.session());
 
-// Configure passport-local to use user model for authentication
+// Configure passport-local to use User Model for authentication
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -80,16 +80,9 @@ passport.deserializeUser(User.deserializeUser());
 
 //catch-all route: - without the hash-bang, the server is handling the routing
 //ensure that any unhandled requests are served by simply sending index.html.
+//instead of 404 error
 app.all('*', function(req, res) {
   res.sendFile(__dirname + "/public/index.html")
-});
-
-//errors
-//404 error
-app.use(function(req, res, next){
-  var err = new Error('Not found');
-  err.status = 404;
-  next(err);
 });
 
 // main error handler

@@ -1,14 +1,15 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var plm = require('passport-local-mongoose');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const plm = require('passport-local-mongoose');
 
-var UserSchema = new Schema({
+const UserSchema = new Schema({
   username: String,
   password: String
 });
 
+//plugin needs to be connected to the schema before it is used to create the mongoose model.
 UserSchema.plugin(plm);
 
-var User = mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema);
 
 module.exports = User;
