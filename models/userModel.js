@@ -7,6 +7,7 @@ const UserSchema = new Schema({
   password: String
 });
 
+//plugin needs to be connected to the schema before it is used to create the mongoose model.
 UserSchema.plugin(plm);
 
 const User = mongoose.model("User", UserSchema);

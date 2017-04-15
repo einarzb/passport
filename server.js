@@ -40,12 +40,10 @@ app.use(expressSession({
 
 // initializes passport and tells Express we want to use it as middleware
 app.use(passport.initialize());
-
-//***must be placed here***
 //makes sure our app is using passport's-session middleware!
 app.use(passport.session());
 
-// Configure passport-local to use user model for authentication
+// Configure passport-local to use User Model for authentication
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -82,16 +80,9 @@ passport.deserializeUser(User.deserializeUser());
 
 //catch-all route: - without the hash-bang, the server is handling the routing
 //ensure that any unhandled requests are served by simply sending index.html.
+//instead of 404 error
 app.all('*', function(req, res) {
   res.sendFile(__dirname + "/public/index.html")
-});
-
-//errors
-//404 error
-app.use(function(req, res, next){
-  var err = new Error('Not found');
-  err.status = 404;
-  next(err);
 });
 
 // main error handler
