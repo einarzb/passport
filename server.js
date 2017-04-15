@@ -8,8 +8,10 @@ var mongoose = require('mongoose');
 
 //routing requirements
 var userRoutes = require('./routes/userRoutes');
+
 //mongoose models
 var User = require('./models/userModel');
+
 //var FacebookStrategy = require('passport-facebook').Strategy; //facebook yeahy!
 
 //on AIR
