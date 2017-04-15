@@ -27,7 +27,7 @@
                       </div>
                       <div ng-messages="registerForm.password.$error" style="color:maroon;padding-left:80px;" role="alert">
                           <div ng-message="required"> please fill in password </div>
-                          <div ng-message="pattern">Password must be 6 characters including 1 uppercase letter, and include number</div>
+                          <div ng-message="pattern">Password must include 6 characters including 1 uppercase letter and number</div>
                       </div>
               </div>
               <br>
@@ -36,7 +36,7 @@
                     <i class="fa fa-repeat " aria-hidden="true"></i>
                 </div>
                 <div class="col-md-9">
-                        <input type="password" placeholder="repeat password" name="passwordConfirm" ng-pattern="/\b{{password}}\b/" ng-model="newUser.passwordConfirm" class="form-control" required/>
+                        <input type="password" placeholder="repeat password" name="passwordConfirm" ng-pattern="{{newUser.password}}" ng-model="newUser.passwordConfirm" class="form-control" required/>
                 </div>
                 <div ng-messages="registerForm.passwordConfirm.$error" style="color:maroon;padding-left:80px;" role="alert">
                     <div ng-message="required"> please fill in password </div>
