@@ -16,11 +16,10 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: '/templates/register.html',
       controller: 'authController'
     })
-
     .state('login', {
-      url: '/login',
-      templateUrl: '/templates/login.html',
-      controller: 'mainController'
+    url: '/login',
+    templateUrl: '/templates/login.html',
+    controller: 'authController'
     })
     .state('logout', {
       url: '/logout'
