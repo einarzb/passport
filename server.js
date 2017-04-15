@@ -1,31 +1,39 @@
 //package requirements
 var express = require('express');
-//enable sessions
-var expressSession = require('express-session');
-//passport use it in the background.
-var bodyParser = require('body-parser');
+var expressSession = require('express-session'); //enable sessions
+var bodyParser = require('body-parser');//passport use it in the background.
 var passport = require('passport');
-//most common & traditional strategy to authenticates a person using username & password.
-var LocalStrategy = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy;//most common & traditional strategy to authenticates a person using username & password.
 var mongoose = require('mongoose');
-//mongoose model
-var User = require('./public/scripts/models/userModel')
+
+//routing requirements
+var userRoutes = require('./routes/userRoutes');
+//mongoose models
+var User = require('./models/userModel');
 //var FacebookStrategy = require('passport-facebook').Strategy; //facebook yeahy!
-mongoose.connect('mongodb://localhost/usersdb');
 
 //on AIR
 var app = express();
+mongoose.connect('mongodb://localhost/usersdb', function(err){
+  if (err) throw err;
+});
 
 //middleware
-app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+
+//setup directories for server access
+app.use(express.static('node_modules'));
+app.use(express.static('public'));
+
+//serve routings
+app.use('/auth', userRoutes);
 
 //Configure passport with secret key which create cookie!! and session middleware
 app.use(expressSession({
   secret:"thisIsASecret",
   resave: false,
   saveUninitialized: false
-  //store: new MongoStore({ url: 'mongodb://localhost/logindb'})
 }));
 
 // initializes passport and tells Express we want to use it as middleware
@@ -40,9 +48,6 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-//setup directories for server access
-app.use(express.static('node_modules'));
-app.use(express.static('public'));
 
 
 // var FACEBOOK_APP_ID = '262419510459321',
@@ -71,36 +76,6 @@ app.use(express.static('public'));
 //    console.log(err, user, info);
 //  }));
 
-//A server route that serve the login form
-app.get('/public/templates/login', function(req, res) {
-  res.sendFile(__dirname + '/public/templates/login.html');
-});
-
-//fetch logged-in username
-//user is path parameter
-app.get('/success/:user', function (req, res){
-  //checks if user object exists - if not - redirect to error page
-          if (req.isAuthenticated()) {
-           res.send('Hey, ' + req.user + ', hello from the server!');
-         } else {
-           res.redirect('/error');
-         }
-    });
-
-//STEP 1:
-//takes username & password inputs from the request body and pass them to passport's done function **line 58**
-app.post('/public/templates/login',
-//passport.authenticate - middleware that takes two arguments (passport strategy, redirect routes)
-passport.authenticate('local', {
-  successRedirect: '/success/:user',
-  failureRedirect: '/error'
-}));
-
-//Passport's logout method removes the req.user property and clears the login session.
-app.get('/logout', function (req, res) {
-  req.logout();
-  res.send('Logged out!');
-});
 
 
 //catch-all route: - without the hash-bang, the server is handling the routing
