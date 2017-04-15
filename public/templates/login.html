@@ -1,24 +1,43 @@
-<form class="text-center" action="http://localhost:8000/public/templates/login" method="post">
-  <!-- ng-submit="submit()" -->
-<div class="well">
-    <h2 class="text-center ">login <i class="fa fa-lock " aria-hidden="true "></i></h2>
+<form class="text-center" ng-submit="login()" name="loginForm">
+<div class="row well">
+    <h2 class="col-md-12 text-center ">login <i class="fa fa-lock " aria-hidden="true "></i></h2>
     <!-- ng-model="logUser.name" -->
-        <label>Username:<i class="fa fa-user " aria-hidden="true "></i>
-              <input type="text" name="username" class="form-control " />
-        </label>
-        <!-- ng-model="logUser.password" -->
-        <label>Password:<i class="fa fa-lock " aria-hidden="true ">  </i>
-            <input type="password" name="password" class="form-control"/>
-        </label><br><br>
+    <div class="row">
+          <div class="col-md-3 col-md-push-3" style="font-size:1.3em;margin-top:-10px;">
+              <i class="fa fa-user " aria-hidden="true"></i>
+          </div>
+          <div class="col-md-9">
+              <input type="text " name="username" placeholder="user name" ng-model="user.username" ng-minlength="2" class="form-control" required/>
+          </div>
+              <div ng-messages="loginForm.username.$error" style="color:maroon;padding-left:30px;" role="alert">
+                  <div ng-message="required"> please fill in name </div>
+                  <div ng-message="minlength"> your name is too short </div>
+              </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-3 col-md-push-3" style="font-size:1.3em;margin-top:-10px;">
+                <i class="fa fa-lock " aria-hidden="true"></i>
+            </div>
+            <div class="col-md-9">
+                <input type="password" placeholder="password" name="password" ng-pattern="/^(?=.*[a-z])(?=.*\d)(?=.*[A-Z]).{6,16}$/"
+ng-model="user.password" class="form-control" required/>
+            </div>
+            <div ng-messages="loginForm.password.$error" style="color:maroon;padding-left:80px;" role="alert">
+                <div ng-message="required"> please fill in password </div>
+                <div ng-message="pattern">Password must include 6 characters including 1 uppercase letter and number</div>
+            </div>
+    </div>
+    <br><br>
         remember me
         <input type="checkbox" checked data-toggle="toggle" data-size="mini" data-onstyle="default"> <br><br><br>
 
         <input type="submit" class="btn btn-success btn-sm login"/> <br><br>
 </div>
-<!-- <div class="well">
+<div class="well">
         <a class="btn btn-info btn-sm" ui-sref="register"> Create Account</a> <br> <br>
 
         <p class="text-muted" style="font-size:0.9em;">By signing up, you agree to our <a href="#">terms of service</a> and <a href="#">privacy policy</a></p>
-</div> -->
+</div>
 
     </form>
