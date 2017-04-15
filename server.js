@@ -1,21 +1,21 @@
 //package requirements
-var express = require('express');
-var expressSession = require('express-session'); //enable sessions
-var bodyParser = require('body-parser');//passport use it in the background.
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;//most common & traditional strategy to authenticates a person using username & password.
-var mongoose = require('mongoose');
+const express = require('express');
+const expressSession = require('express-session'); //enable sessions
+const bodyParser = require('body-parser');//passport use it in the background.
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;//most common & traditional strategy to authenticates a person using username & password.
+const mongoose = require('mongoose');
 
 //routing requirements
-var userRoutes = require('./routes/userRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 //mongoose models
-var User = require('./models/userModel');
+const User = require('./models/userModel');
 
 //var FacebookStrategy = require('passport-facebook').Strategy; //facebook yeahy!
 
 //on AIR
-var app = express();
+const app = express();
 mongoose.connect('mongodb://localhost/usersdb', function(err){
   if (err) throw err;
 });
