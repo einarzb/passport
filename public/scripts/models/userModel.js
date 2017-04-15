@@ -7,8 +7,7 @@ var UserSchema = new Schema({
   password: String
 });
 
+//the plugin needs to be connected to the schema before it is used to create the mongoose model.
 UserSchema.plugin(passportLocalMongoose);
 
-var User = mongoose.model("User", UserSchema);
-
-module.exports = User;
+module.exports = mongoose.model("User", UserSchema);
