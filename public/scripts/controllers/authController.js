@@ -1,4 +1,7 @@
 app.controller('authController', function($scope, $http, $location) {
-console.log("im in fb controller");
 
+    $scope.register = function(newUser){
+      console.log("im in authController");
+      console.log(newUser);
+    }
 });

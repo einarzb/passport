@@ -10,6 +10,13 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: '/templates/partial-home.html',
       controller: 'mainController'
     })
+    //authentication states//
+    .state('register', {
+      url: '/register',
+      templateUrl: '/templates/register.html',
+      controller: 'authController'
+    })
+
     .state('login', {
       url: '/login',
       templateUrl: '/templates/login.html',
@@ -17,11 +24,6 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('logout', {
       url: '/logout'
-    })
-    .state('register', {
-      url: '/register',
-      templateUrl: '/templates/register.html',
-      controller: 'mainController'
     })
     .state('/auth/facebook', {
       url: '/auth/facebook',

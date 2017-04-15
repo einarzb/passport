@@ -1,44 +1,40 @@
 <!--SIGNUP-->
     <form class="text-center" ng-submit="register(newUser)">
       <div class="well">
-
+        <h2>register</h2>
         <div>
-            <label>Username:
-                <i class="fa fa-user " aria-hidden="true ">
-                  <input type="text " name="username" ng-model="newUser.name" class="form-control " />
-                </i>
-            </label>
+            <label>Username:<i class="fa fa-user " aria-hidden="true "></i></label>
+            <input type="text " name="username" ng-model="newUser.username" class="form-control"/>
         </div>
         <div>
-            <label>Password:
-                <i class="fa fa-lock " aria-hidden="true ">
-                  <input type="password" ng-model="newUser.password" class="form-control " />
-                </i>
-            </label>
+            <label>Password:<i class="fa fa-lock " aria-hidden="true"></i></label>
+              <input type="password" ng-model="newUser.password" class="form-control"/>
         </div>
         <div>
-            <label>Confirm Password:
-                <i class="fa fa-lock " aria-hidden="true ">
-                  <input type="password" ng-model="newUser.passwordConfirm" class="form-control " />
-                </i>
-           </label>
-        </div> <br>
-
-        <button type="submit" class="btn btn-success btn-sm "/>submit</button>
+            <label>Confirm Password:<i class="fa fa-lock " aria-hidden="true ">  </i> </label>
+              <input type="password" ng-model="newUser.passwordConfirm" class="form-control " />
+        </div>
+          <hr>
+            <button type="submit" class="btn btn-success btn-sm "/>submit</button>
       </div>
 
         <!--SOCIAL-->
-        <div class="well text-center" style="height:200px;">
-          <hr>
-          <p>or login with social</p>
-                <button type="button" class="pull-right " style="background-color:transparent;border:none ">
-                      <a ui-sref="/auth/facebook">
-                          <img src="images/login-fb.png "/>
-                      </a>
-                </button>
-                <button type="button " class="pull-right " style="background-color:transparent;border:none">
-                      <img src="images/google.png "/>
-                </button>
-       </div>
-
-    </form>
+        <div class="row">
+            <div class="well text-center col-md-12" style="height:200px;">
+              <h3>or login with social</h3>
+              <hr>
+                  <div class="col-md-3 col-md-push-1">
+                    <button type="button" style="background-color:transparent;border:none ">
+                          <a ui-sref="/auth/facebook">
+                              <img src="images/login-fb.png "/>
+                          </a>
+                    </button>
+                  </div>
+                  <div class="col-md-9 col-md-push-1">
+                        <button type="button" style="background-color:transparent;border:none">
+                              <img src="images/google.png "/>
+                        </button>
+                  </div>
+           </div>
+     </div>
+</form>
