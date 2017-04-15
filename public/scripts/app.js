@@ -15,6 +15,10 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: '/templates/login.html',
       controller: 'mainController'
     })
+    .state('logout', {
+      url: '/logout',
+      templateUrl: '/templates/partial-home.html'
+    })
     .state('register', {
       url: '/register',
       templateUrl: '/templates/register.html',
@@ -25,13 +29,19 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: '/templates/facebook.html',
       controller: 'authController'
     })
-    .state('/success', {
-      url: '/success',
+    .state('success', {
+      url: '/success/:user',
       templateUrl: '/templates/success.html',
+      //$stateParams is an object that can take both path and query parameters from the URL.
+      controller: function($scope, $stateParams){
+        $scope.loggedUserName = $stateParams;
+      }
     })
-    .state('/error', {
+    .state('error', {
       url: '/error',
-      templateUrl: '/templates/error.html',
+      templateUrl: '/templates/error.html'
     })
+
+
 
 });
