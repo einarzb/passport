@@ -16,8 +16,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
       controller: 'mainController'
     })
     .state('logout', {
-      url: '/logout',
-      templateUrl: '/templates/partial-home.html'
+      url: '/logout'
     })
     .state('register', {
       url: '/register',
