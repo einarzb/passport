@@ -51,9 +51,12 @@ router.post('/register', function(req, res, next) {
 
 
 //route for fetching current user
-  router.get('/currentUser', function(req, res) {
+//If an open session already exists on the server which matches the session ID in the client's request (found in the cookie)*,
+// return the username;
+  router.get('/currentuser', function(req, res) {
     if (req.user) {
-      res.send(req.user.username)
+      res.send(req.user.username);
+      console.log(req.user.username, "im in authroutes");
     } else {
       res.send(null)
     }

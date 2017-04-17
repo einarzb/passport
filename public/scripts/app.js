@@ -37,7 +37,7 @@ app.config(['$stateProvider','$urlRouterProvider','$locationProvider', function(
     })
 
     .state('success', {
-      url: '/currentUser/',
+      url: '/currentuser/',
       templateUrl: '/templates/success.html',
       controller: 'masterController' //navbar controller
     })

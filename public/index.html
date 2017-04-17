@@ -21,8 +21,8 @@
 </head>
 
 <body ng-cloak="">
-    <nav class="navbar navbar-default navbar-static-top" ng-controller="masterController">
-        <div class="container">
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container" ng-controller="masterController">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                   <span class="sr-only">Toggle navigation</span>
@@ -36,7 +36,7 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>Hello {{currentUser.username}}<i class="fa fa-user" aria-hidden="true"></i>
+                    <li>Hello {{currentUser.username}} <i class="fa fa-user" aria-hidden="true"></i>
                     </li>
 
                     <li>
@@ -68,7 +68,7 @@
     <script type="text/javascript " src="scripts/controllers/mainController.js "></script>
     <script type="text/javascript " src="scripts/controllers/navController.js "></script>
     <script type="text/javascript " src="scripts/controllers/authController.js "></script>
-    <script type="text/javascript " src="scripts/controllers/masterController.js "></script>
+    <script type="text/javascript" src="scripts/controllers/masterController.js"></script>
 
 
 </body>

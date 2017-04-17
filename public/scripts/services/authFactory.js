@@ -2,7 +2,9 @@ app.factory('authFactory', function($http) {
 
   //the object that will hold users data
     var auth = {};
-  //another object for current user details
+  //nested object for authenticated user details
+  //importent for everything!
+  
     auth.currentUser = {};
   //register function
     auth.register = function(user) {
@@ -17,6 +19,7 @@ app.factory('authFactory', function($http) {
       });
     };
 
+//login
     auth.login = function(user){
       console.log("im in factory login func");
       return $http.post('/users/login', user)
@@ -26,5 +29,13 @@ app.factory('authFactory', function($http) {
     });
   };
 
+//fetch users name
+  auth.getCurrentUser = function(){
+    return $http.get('/users/currentuser')
+    .then(function(response){
+      auth.currentUser.username = angular.copy(response.data);
+      console.log(auth.currentUser.username);
+    });
+  }
     return auth;
   });
