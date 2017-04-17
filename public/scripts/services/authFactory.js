@@ -17,6 +17,7 @@ app.factory('authFactory', function($http) {
       .then(function(response){
         auth.currentUser = angular.copy(response.data)
     });
+  };
 
     return auth;
   });
