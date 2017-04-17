@@ -28,9 +28,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static('node_modules'));
 app.use(express.static('public'));
 
-//serve routings
-app.use('/users', authRoutes);
-
 //Configure passport with secret key which create cookie!! and session middleware
 app.use(expressSession({
   secret:"thisIsASecret",
@@ -48,6 +45,9 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+
+//serve routings
+app.use('/users', authRoutes);
 
 
 // var FACEBOOK_APP_ID = '262419510459321',

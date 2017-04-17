@@ -34,11 +34,10 @@
                     <span class="logo-text">EinarAuthenticate.inc</span>
                 </a>
             </div>
-            <div class="collapse navbar-collapse">
+            <div class="collapse navbar-collapse" ng-controller="masterController">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>Hello {{user}}<i class="fa fa-user" aria-hidden="true"></i>
+                    <li>Hello {{currentUser.username}}<i class="fa fa-user" aria-hidden="true"></i>
                     </li>
-                    <!-- <a ui-sref="stateName({username:'req.username.name'})"></a> -->
 
                     <li>
                         <a ui-sref="login">login</a>
@@ -69,6 +68,8 @@
     <script type="text/javascript " src="scripts/controllers/mainController.js "></script>
     <script type="text/javascript " src="scripts/controllers/navController.js "></script>
     <script type="text/javascript " src="scripts/controllers/authController.js "></script>
+    <script type="text/javascript " src="scripts/controllers/masterController.js "></script>
+
 
 </body>
 

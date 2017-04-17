@@ -1,9 +1,28 @@
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
-
 //mongoose model
 var User = require('../models/userModel');
+
+//checks if user object exists - if not - redirect to error page
+var ensureAuthenticated = function(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    res.redirect('/error');
+  }
+};
+
+//showing all users
+router.get('/', function (req, res, next) {
+  User.find(function (error, users) { //users is the route of .. users!
+    if (error) {
+      console.error(error)
+      return next(error);
+    }
+    res.send(users);
+  });
+});
 
 //A server route that serve the login form
 router.get('../public/templates/login', function(req, res) {
@@ -30,6 +49,17 @@ router.post('/register', function(req, res, next) {
       });
   });
 
+
+//route for fetching current user
+  router.get('/currentUser', function(req, res) {
+    if (req.user) {
+      res.send(req.user.username)
+    } else {
+      res.send(null)
+    }
+  });
+
+
   // If this function gets called, authentication was successful!
   router.post('/login',
   passport.authenticate('local'),
@@ -44,15 +74,6 @@ router.get('/logout', function (req, res) {
 });
 
 
-//fetch logged-in username - user is path parameter
-// router.get('../success/:user', function (req, res){
-//   //checks if user object exists - if not - redirect to error page
-//           if (req.isAuthenticated()) {
-//            res.send('Hey, ' + req.user + ', hello from the server!');
-//          } else {
-//            res.redirect('/error');
-//          }
-//     });
 
 
 
