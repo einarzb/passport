@@ -49,6 +49,17 @@ router.post('/register', function(req, res, next) {
       });
   });
 
+
+//route for fetching current user
+  router.get('/currentUser', function(req, res) {
+    if (req.user) {
+      res.send(req.user.username)
+    } else {
+      res.send(null)
+    }
+  });
+
+
   // If this function gets called, authentication was successful!
   router.post('/login',
   passport.authenticate('local'),

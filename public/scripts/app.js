@@ -25,17 +25,19 @@ app.config(['$stateProvider','$urlRouterProvider','$locationProvider', function(
     templateUrl: '/templates/login.html',
     controller: 'authController'
     })
-    
+
     .state('logout', {
       url: '/logout'
     })
+
     .state('/auth/facebook', {
       url: '/auth/facebook',
       templateUrl: '/templates/facebook.html',
       controller: 'authController'
     })
+
     .state('success', {
-      url: '/success/',
+      url: '/currentUser/',
       templateUrl: '/templates/success.html',
       controller: 'authController'
     })
