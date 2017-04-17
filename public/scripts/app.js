@@ -39,7 +39,7 @@ app.config(['$stateProvider','$urlRouterProvider','$locationProvider', function(
     .state('success', {
       url: '/currentUser/',
       templateUrl: '/templates/success.html',
-      controller: 'authController'
+      controller: 'masterController' //navbar controller
     })
     .state('error', {
       url: '/error',

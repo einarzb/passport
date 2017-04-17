@@ -43,7 +43,7 @@ router.post('/register', function(req, res, next) {
             req.login(user, function(err) {
               if (err) {
                 return next(err);
-            }//if login success -> send user name
+            }//if login success -> send user name only! for security and bandwitch-->
             res.send(req.user.username);
           });
       });
