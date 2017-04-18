@@ -67,7 +67,13 @@ router.post('/register', function(req, res, next) {
   router.post('/login',
   passport.authenticate('local'),
   function(req, res) {
-  res.send(req.user.username)
+    console.log(req.user);
+    let newArray = {
+      username: req.user.username,
+      id: req.user._id
+    };
+  // return res.send(req.user);
+  return res.send(newArray);
 });
 
 //Passport's logout method removes the req.user property & clears the login session.

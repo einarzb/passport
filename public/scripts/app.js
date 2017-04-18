@@ -27,7 +27,9 @@ app.config(['$stateProvider','$urlRouterProvider','$locationProvider', function(
     })
 
     .state('logout', {
-      url: '/logout'
+      url: '/logout',
+      templateUrl: '/templates/logout.html',
+      controller: 'authController'
     })
 
     .state('/auth/facebook', {
@@ -37,7 +39,7 @@ app.config(['$stateProvider','$urlRouterProvider','$locationProvider', function(
     })
 
     .state('success', {
-      url: '/currentuser/',
+      url: '/success',
       templateUrl: '/templates/success.html',
       controller: 'masterController' //navbar controller
     })
