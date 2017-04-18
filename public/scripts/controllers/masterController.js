@@ -4,7 +4,6 @@ app.controller('masterController', function($scope, $state, authFactory) {
     $scope.currentId = authFactory.currentUser._id;
 
     $scope.logout = function() {
-        console.log("logout");
         authFactory.logout();
         $state.go('logout');
       }

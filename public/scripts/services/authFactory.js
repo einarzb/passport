@@ -6,7 +6,7 @@ app.factory('authFactory', function($http) {
   //importent for everything!
 
     auth.currentUser = {};
-    
+
   //register function
     auth.register = function(user) {
       console.log("im in authfactory register func");
@@ -16,7 +16,7 @@ app.factory('authFactory', function($http) {
         console.log(response.data);//output username
         auth.currentUser.username = angular.copy(response.data);
         console.log(auth.currentUser.username); //output username
-        //console.log(auth.currentUser._id); - cant get id
+        console.log(auth.currentUser._id); //
       });
     };
 
@@ -25,8 +25,11 @@ app.factory('authFactory', function($http) {
       console.log("im in factory login func");
       return $http.post('/users/login', user)
       .then(function(response){
-        auth.currentUser.username = angular.copy(response.data);
+        console.log(response.data);
+        auth.currentUser.username = angular.copy(response.data.username);
         console.log(auth.currentUser); //loggedin username
+        console.log(auth.currentUser._id); //
+
     });
   };
 
