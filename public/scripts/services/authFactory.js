@@ -6,6 +6,7 @@ app.factory('authFactory', function($http) {
   //importent for everything!
 
     auth.currentUser = {};
+    
   //register function
     auth.register = function(user) {
       console.log("im in authfactory register func");
