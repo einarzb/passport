@@ -24,7 +24,7 @@ app.factory('authFactory', function($http) {
       console.log("im in factory login func");
       return $http.post('/users/login', user)
       .then(function(response){
-        auth.currentUser = angular.copy(response.data);
+        auth.currentUser.username = angular.copy(response.data);
         console.log(auth.currentUser); //loggedin username
     });
   };

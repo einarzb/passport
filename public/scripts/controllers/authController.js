@@ -22,7 +22,6 @@ app.controller('authController', function($scope, $state, authFactory) {
         $state.go('success');
       //display error
       }, function(err){
-        $state.go('error');
         alert(err.data); //different error is thrown by passport-authenticate
       });
     };

@@ -27,7 +27,9 @@ app.config(['$stateProvider','$urlRouterProvider','$locationProvider', function(
     })
 
     .state('logout', {
-      url: '/logout'
+      url: '/logout',
+      templateUrl: '/templates/logout.html',
+      controller: 'authController'
     })
 
     .state('/auth/facebook', {

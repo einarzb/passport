@@ -1,4 +1,4 @@
-app.controller('masterController', function($scope, authFactory) {
+app.controller('masterController', function($scope, $state, authFactory) {
     authFactory.getCurrentUser(); //invokes factory function that fetches loggedin username
     $scope.currentUser = authFactory.currentUser;
     $scope.currentId = authFactory.currentUser._id;
@@ -6,5 +6,6 @@ app.controller('masterController', function($scope, authFactory) {
     $scope.logout = function() {
         console.log("logout");
         authFactory.logout();
+        $state.go('logout');
       }
 });
