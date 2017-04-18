@@ -13,8 +13,8 @@ app.factory('authFactory', function($http) {
       .then(function(response){
         console.log(response);//output object
         console.log(response.data);//output username
-        auth.currentUser = angular.copy(response.data);
-        console.log(auth.currentUser); //output username
+        auth.currentUser.username = angular.copy(response.data);
+        console.log(auth.currentUser.username); //output username
         //console.log(auth.currentUser._id); - cant get id
       });
     };
